@@ -1,0 +1,27 @@
+{
+	"manifest_version": 2,
+	"name": "Markdown Chrome extensions",
+	"version": "1.0",
+	"description": "毕业设计 - 基于 Chrome 扩展插件的 Markdown 阅读编辑器",
+	"author": "zhaopeiran",
+	"icons":
+	{
+		"48": "icon.png",
+		"128": "icon.png"
+	},
+	"browser_action": 
+	{
+		"default_icon": "icon.png",
+		"default_title": "插件描述",
+		"default_popup": "popup.html"
+	},
+	"content_scripts": [
+		{
+		  "matches": ["file:///*.md"],
+		  "run_at": "document_end",
+		  "js": ["js/marked.min.js", "js/jquery.min.js", "js/bootstrap.min.js", "js/popup.js", "js/index.js"],
+		  "css": ["css/bootstrap.css"]
+		}
+	  ],
+	"options_page": "index.html"
+}
