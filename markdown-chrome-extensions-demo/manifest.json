@@ -20,7 +20,7 @@
 		{
 		  "matches": ["file:///*.md"],
 		  "run_at": "document_end",
-		  "js": ["event.js", "js/popup.js", "js/index.js"]
+		  "js": ["event.js", "js/popup.js"]
 		}
 	  ],
 	"options_page": "index.html"

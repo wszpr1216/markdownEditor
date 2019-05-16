@@ -89,6 +89,35 @@ document.getElementById('print').addEventListener('click', function(){
   window.location.reload();
 });
 
+// Listen to save as file
+document.getElementById('floppy').addEventListener('click', function(e){
+  // var printContents = document.getElementById('out').innerHTML;
+
+  e.preventDefault();
+  save();
+  return false;
+});
+
+// Listen to print as pdf
+document.getElementById('plus').addEventListener('click', function(){
+  window.open(chrome.extension.getURL('index.html'));
+});
+
+//Listen to open a file
+document.getElementById('open').addEventListener('change', function(e){
+  // e.preventDefault();
+  // e.stopPropagation();
+  
+  var selectedFile = document.getElementById('open').files[0];
+  console.log(selectedFile)
+  var theReader = new FileReader();
+  theReader.onload = function(e){
+    editor.setValue(e.target.result);
+  };
+  theReader.readAsText(selectedFile);
+},false);
+
+
 // marked set option
 marked.setOptions({
   highlight: function(code) {

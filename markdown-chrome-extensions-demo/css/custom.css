@@ -111,7 +111,7 @@ table { border-collapse: collapse; border-spacing: 0; }
 td, th { vertical-align: top; padding: 4px 10px; border: 1px solid #bbb; }
 tr:nth-child(even) td, tr:nth-child(even) th { background: #eee; }
 
-#print {
+/* #print {
     position: fixed;
     z-index: 2;
     background: #ff4081 url("../icon/print.png") no-repeat center;
@@ -127,4 +127,4 @@ tr:nth-child(even) td, tr:nth-child(even) th { background: #eee; }
     width: 56px;
     outline: none;
     text-align: center;
-}
+} */
