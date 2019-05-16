@@ -4,6 +4,7 @@
 	"version": "1.0",
 	"description": "毕业设计 - 基于 Chrome 扩展插件的 Markdown 阅读编辑器",
 	"author": "zhaopeiran",
+	"permissions": ["storage"],
 	"icons":
 	{
 		"48": "icon.png",
