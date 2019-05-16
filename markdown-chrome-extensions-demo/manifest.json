@@ -20,8 +20,7 @@
 		{
 		  "matches": ["file:///*.md"],
 		  "run_at": "document_end",
-		  "js": ["js/marked.min.js", "js/jquery.min.js", "js/bootstrap.min.js", "js/popup.js", "js/index.js"],
-		  "css": ["css/bootstrap.css"]
+		  "js": ["event.js", "js/popup.js", "js/index.js"]
 		}
 	  ],
 	"options_page": "index.html"
