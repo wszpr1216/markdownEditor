@@ -13,7 +13,7 @@
 	"browser_action": 
 	{
 		"default_icon": "icon.png",
-		"default_title": "插件描述",
+		"default_title": "毕业设计 - 基于Chrome扩展插件的Markdown文本编辑器",
 		"default_popup": "popup.html"
 	},
 	"content_scripts": [
