@@ -4,24 +4,28 @@
 	"version": "1.0",
 	"description": "毕业设计 - 基于 Chrome 扩展插件的 Markdown 阅读编辑器",
 	"author": "zhaopeiran",
-	"permissions": ["storage"],
-	"icons":
-	{
+	"permissions": [
+		"storage"
+	],
+	"icons": {
 		"48": "icon.png",
 		"128": "icon.png"
 	},
-	"browser_action": 
-	{
+	"browser_action": {
 		"default_icon": "icon.png",
 		"default_title": "毕业设计 - 基于Chrome扩展插件的Markdown文本编辑器",
 		"default_popup": "popup.html"
 	},
 	"content_scripts": [
 		{
-		  "matches": ["file:///*.md"],
-		  "run_at": "document_end",
-		  "js": ["event.js", "js/popup.js"]
+			"matches": [
+				"file:///*.md"
+			],
+			"run_at": "document_end",
+			"js": [
+				"js/popup.js"
+			]
 		}
-	  ],
+	],
 	"options_page": "index.html"
 }

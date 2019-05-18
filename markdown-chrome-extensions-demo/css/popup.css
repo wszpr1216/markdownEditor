@@ -5,78 +5,79 @@
     cursor: pointer;
     vertical-align: middle;
     -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     z-index: 1;
-  }
+}
 
-  .ripple-effect .ripple {
+.ripple-effect .ripple {
     display: block;
     position: absolute;
     border-radius: 100%;
     background: rgba(255, 255, 255, 0.5);
     -webkit-transform: scale(0);
-            transform: scale(0);
+    transform: scale(0);
     pointer-events: none;
-  }
+}
 
-  .ripple-effect.ripple-pink .ripple {
+.ripple-effect.ripple-pink .ripple {
     background: rgba(233, 30, 99, 0.725) !important;
-  }
+}
 
-  .ripple-effect .animated {
+.ripple-effect .animated {
     -webkit-animation: ripple 0.6s linear;
-            animation: ripple 0.6s linear;
-  }
+    animation: ripple 0.6s linear;
+}
 
-  @-webkit-keyframes ripple {
+@-webkit-keyframes ripple {
     100% {
-      opacity: 0;
-      -webkit-transform: scale(2.5);
-              transform: scale(2.5);
+        opacity: 0;
+        -webkit-transform: scale(2.5);
+        transform: scale(2.5);
     }
-  }
-  @keyframes ripple {
-    100% {
-      opacity: 0;
-      -webkit-transform: scale(2.5);
-              transform: scale(2.5);
-    }
-  }
+}
 
-  .holder {
+@keyframes ripple {
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(2.5);
+        transform: scale(2.5);
+    }
+}
+
+.holder {
     min-height: 10px;
     padding: 1em 0;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
     -ms-flex-line-pack: center;
-        align-content: center;
-  }
+    align-content: center;
+}
 
-  .rkmd-btn.btn-white {
+.rkmd-btn.btn-white {
     color: #444;
     background-color: #FFF;
-  }
+}
 
-  .ripple-effect {
+.ripple-effect {
     display: inline-block;
     position: relative;
     overflow: hidden;
     cursor: pointer;
     vertical-align: middle;
     -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     z-index: 1;
-  }
+}
 
-  .rkmd-btn {
+.rkmd-btn {
     display: inline-block;
     position: relative;
     cursor: pointer;
@@ -96,11 +97,11 @@
     outline: none;
     border: none;
     -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;  
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     border-radius: 2px;
     -webkit-transition: all .3s ease-out;
     transition: all .3s ease-out;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.225);
-  }
+}

@@ -1,54 +1,54 @@
 var storage = {
-  get: (function(key) {
+  get: (function (key) {
     return localStorage.getItem(key);
   }),
 
-  set: (function(key, value) {
+  set: (function (key, value) {
     localStorage.setItem(key, value);
     var data = {};
     data[key] = value;
   }),
 
-  has: (function(key) {
-    if(localStorage.hasOwnProperty(key)) {
+  has: (function (key) {
+    if (localStorage.hasOwnProperty(key)) {
       return true;
     } else {
       return false;
     }
   }),
 
-  remove: (function(key) {
+  remove: (function (key) {
     localStorage.removeItem(key);
   }),
 };
 
-function update(e){
+function update(e) {
   var val = e.getValue();
   storage.set('editor.content', JSON.stringify(val));
   setOutput(val);
 }
 
-function setOutput(val){
+function setOutput(val) {
   document.getElementById('out').innerHTML = marked(val);
 }
 
-function save(){
+function save() {
   var code = editor.getValue();
   var blob = new Blob([code], { type: 'text/plain' });
   saveBlob(blob);
 }
 
-function saveBlob(blob){
+function saveBlob(blob) {
   var name = "untitled.md";
-  if(window.saveAs){
+  if (window.saveAs) {
     window.saveAs(blob, name);
-  }else if(navigator.saveBlob){
+  } else if (navigator.saveBlob) {
     navigator.saveBlob(blob, name);
-  }else{
+  } else {
     url = URL.createObjectURL(blob);
     var link = document.createElement("a");
-    link.setAttribute("href",url);
-    link.setAttribute("download",name);
+    link.setAttribute("href", url);
+    link.setAttribute("download", name);
     var event = document.createEvent('MouseEvents');
     event.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
     link.dispatchEvent(event);
@@ -56,8 +56,8 @@ function saveBlob(blob){
 }
 
 // Listen Ctrl + S
-document.addEventListener('keydown', function(e){
-  if(e.keyCode == 83 && (e.ctrlKey || e.metaKey)){
+document.addEventListener('keydown', function (e) {
+  if (e.keyCode == 83 && (e.ctrlKey || e.metaKey)) {
     e.preventDefault();
     save();
     return false;
@@ -65,13 +65,13 @@ document.addEventListener('keydown', function(e){
 })
 
 // Listen to drap file
-document.addEventListener('drop', function(e){
+document.addEventListener('drop', function (e) {
   e.preventDefault();
   e.stopPropagation();
 
   var theFile = e.dataTransfer.files[0];
   var theReader = new FileReader();
-  theReader.onload = function(e){
+  theReader.onload = function (e) {
     editor.setValue(e.target.result);
   };
 
@@ -79,7 +79,7 @@ document.addEventListener('drop', function(e){
 }, false);
 
 // Listen to print as pdf
-document.getElementById('print').addEventListener('click', function(){
+document.getElementById('print').addEventListener('click', function () {
   var printContents = document.getElementById('out').innerHTML;
 
   document.body.innerHTML = printContents;
@@ -90,7 +90,7 @@ document.getElementById('print').addEventListener('click', function(){
 });
 
 // Listen to save as file
-document.getElementById('floppy').addEventListener('click', function(e){
+document.getElementById('floppy').addEventListener('click', function (e) {
   // var printContents = document.getElementById('out').innerHTML;
 
   e.preventDefault();
@@ -99,28 +99,28 @@ document.getElementById('floppy').addEventListener('click', function(e){
 });
 
 // Listen to print as pdf
-document.getElementById('plus').addEventListener('click', function(){
+document.getElementById('plus').addEventListener('click', function () {
   window.open(chrome.extension.getURL('index.html'));
 });
 
 //Listen to open a file
-document.getElementById('open').addEventListener('change', function(e){
+document.getElementById('open').addEventListener('change', function (e) {
   // e.preventDefault();
   // e.stopPropagation();
-  
+
   var selectedFile = document.getElementById('open').files[0];
   console.log(selectedFile)
   var theReader = new FileReader();
-  theReader.onload = function(e){
+  theReader.onload = function (e) {
     editor.setValue(e.target.result);
   };
   theReader.readAsText(selectedFile);
-},false);
+}, false);
 
 
 // marked set option
 marked.setOptions({
-  highlight: function(code) {
+  highlight: function (code) {
     return hljs.highlightAuto(code).value;
   }
 });
@@ -130,7 +130,7 @@ navigator.saveBlob = navigator.saveBlob || navigator.webkitSaveBlob || navigator
 window.saveAs = window.saveAs || window.webkitSaveAs || window.mozSaveAs || window.msSaveAs;
 
 var editor;
-if(storage.has('editor.content')) {
+if (storage.has('editor.content')) {
   content = JSON.parse(storage.get('editor.content'));
   editor = CodeMirror(document.body, {
     value: content,
@@ -142,12 +142,12 @@ if(storage.has('editor.content')) {
   });
 } else {
   editor = CodeMirror.fromTextArea(document.getElementById('code'), {
-  mode: 'gfm',
-  lineNumbers: true,
-  matchBrackets: true,
-  lineWrapping: true,
-  theme: 'default',
-});
+    mode: 'gfm',
+    lineNumbers: true,
+    matchBrackets: true,
+    lineWrapping: true,
+    theme: 'default',
+  });
 }
 
 update(editor);
@@ -157,16 +157,16 @@ editor.focus();
 // Synchronize scrollbars
 var previewDiv = document.getElementById("out");
 var editorDiv = editor.getScrollerElement();
-previewDiv.addEventListener("scroll", function(){
+previewDiv.addEventListener("scroll", function () {
   var info = editor.getScrollInfo();
-  var percent = previewDiv.scrollTop/(previewDiv.scrollHeight - previewDiv.clientHeight);
+  var percent = previewDiv.scrollTop / (previewDiv.scrollHeight - previewDiv.clientHeight);
   editor.scrollTo(0, percent * (info.height - info.clientHeight));
   editorDiv.scrollTop = percent * (editorDiv.scrollHeight - editorDiv.clientHeight);
 });
 
 // Another way is to use editor.on('scroll', scroll);
-editorDiv.addEventListener("scroll", function(){
+editorDiv.addEventListener("scroll", function () {
   var info = editor.getScrollInfo();
-  var percent = info.top/(info.height - info.clientHeight);
+  var percent = info.top / (info.height - info.clientHeight);
   previewDiv.scrollTop = percent * (previewDiv.scrollHeight - previewDiv.clientHeight);
 });
