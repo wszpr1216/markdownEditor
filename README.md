@@ -17,7 +17,7 @@ version 0.0.1 (2019.3.21更新):
 
     > Refused to execute inline script because it violates the following Content Security Policy directive: "script-src 'self' chrome-extension-resource:"
 
-    解决方案: 使用外联js ( popup.js & index.js )
+    解决方案: 使用外联js ( popup.js )
 
 version 0.1.0 (2019.5.16 20:30)
 

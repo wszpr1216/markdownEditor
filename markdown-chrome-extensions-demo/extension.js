@@ -1,3 +1,4 @@
+// 存储类
 var storage = {
     get: (function(key) {
         return localStorage.getItem(key);
@@ -22,22 +23,26 @@ var storage = {
     }),
 };
 
+// 更新存储和展示区内容
 function update(e) {
     var val = e.getValue();
     storage.set('editor.content', JSON.stringify(val));
     setOutput(val);
 }
 
+// 使用marked渲染
 function setOutput(val) {
     document.getElementById('out').innerHTML = marked(val);
 }
 
+// 将CodeMirror中的值保存
 function save() {
     var code = editor.getValue();
     var blob = new Blob([code], { type: 'text/plain' });
     saveBlob(blob);
 }
 
+// 存储为本地文件
 function saveBlob(blob) {
     var name = "untitled.md";
     if (window.saveAs) {
@@ -55,7 +60,7 @@ function saveBlob(blob) {
     }
 }
 
-// Listen Ctrl + S
+// 监听Ctrl+S
 document.addEventListener('keydown', function(e) {
     if (e.keyCode == 83 && (e.ctrlKey || e.metaKey)) {
         e.preventDefault();
@@ -64,9 +69,11 @@ document.addEventListener('keydown', function(e) {
     }
 })
 
-// Listen to drap file
+// 监听拖拽文件
 document.addEventListener('drop', function(e) {
+    // 阻止元素发生默认的行为
     e.preventDefault();
+    // 不再派发事件
     e.stopPropagation();
 
     var theFile = e.dataTransfer.files[0];
@@ -78,38 +85,34 @@ document.addEventListener('drop', function(e) {
     theReader.readAsText(theFile);
 }, false);
 
-// Listen to print as pdf
+// 监听打印按钮
 document.getElementById('print').addEventListener('click', function() {
     var printContents = document.getElementById('out').innerHTML;
-
     document.body.innerHTML = printContents;
-
     window.print();
-
     window.location.reload();
 });
 
-// Listen to save as file
+// 监听保存按钮
 document.getElementById('floppy').addEventListener('click', function(e) {
     // var printContents = document.getElementById('out').innerHTML;
-
     e.preventDefault();
     save();
     return false;
 });
 
-// Listen to print as pdf
+// 监听新建按钮
 document.getElementById('plus').addEventListener('click', function() {
     window.open(chrome.extension.getURL('index.html'));
 });
 
-//Listen to open a file
+// 监听打开按钮
 document.getElementById('open').addEventListener('change', function(e) {
-    // e.preventDefault();
-    // e.stopPropagation();
+    e.preventDefault();
+    e.stopPropagation();
 
     var selectedFile = document.getElementById('open').files[0];
-    console.log(selectedFile)
+    // console.log(selectedFile)
     var theReader = new FileReader();
     theReader.onload = function(e) {
         editor.setValue(e.target.result);
@@ -117,8 +120,7 @@ document.getElementById('open').addEventListener('change', function(e) {
     theReader.readAsText(selectedFile);
 }, false);
 
-
-// marked set option
+// 配置marked
 marked.setOptions({
     highlight: function(code) {
         return hljs.highlightAuto(code).value;
@@ -129,6 +131,7 @@ var URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
 navigator.saveBlob = navigator.saveBlob || navigator.webkitSaveBlob || navigator.mozSaveBlob || navigator.msSaveBlob;
 window.saveAs = window.saveAs || window.webkitSaveAs || window.mozSaveAs || window.msSaveAs;
 
+// 将文本框容器转换为编辑器
 var editor;
 if (storage.has('editor.content')) {
     content = JSON.parse(storage.get('editor.content'));
@@ -151,6 +154,7 @@ if (storage.has('editor.content')) {
 }
 
 update(editor);
+// events change事件
 editor.on('change', update);
 editor.focus();
 
